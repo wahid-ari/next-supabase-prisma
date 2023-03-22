@@ -1,6 +1,27 @@
-## Prisma
+## Supabase 
+when cant access supabase from supabase API
+https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
+Run this SQL script in Supabase SQL editor.
+https://supabase.com/docs/guides/integrations/prisma#troubleshooting
 
-- pnpm generate
+If your database schema is out of sync from your migration history, prisma migrate dev will detect a migration history conflict or a schema drift. When prisma migrate dev detects the drift, it might ask to to reset your database schema. If you choose yes, it will delete the public schema along with the default grants defined in your database.
+
+If you run into this problem, create a draft migration using prisma migrate dev --create-only, and add the following helper SQL:
+
+     grant usage on schema public to postgres, anon, authenticated, service_role;
+
+     grant all privileges on all tables in schema public to postgres, anon, authenticated, service_role;
+     grant all privileges on all functions in schema public to postgres, anon, authenticated, service_role;
+     grant all privileges on all sequences in schema public to postgres, anon, authenticated, service_role;
+
+     alter default privileges in schema public grant all on tables to postgres, anon, authenticated, service_role;
+     alter default privileges in schema public grant all on functions to postgres, anon, authenticated, service_role;
+     alter default privileges in schema public grant all on sequences to postgres, anon, authenticated, service_role;
+
+Run prisma migrate dev to apply the draft migration to the database.
+
+## Prisma
+https://www.prisma.io/docs/reference/api-reference/command-reference
 
 Create the database schema
 Run the following command to create a migration file with the SQL necessary to create the database schema:
@@ -10,6 +31,16 @@ npx prisma migrate dev --name init
 You should see the following output:
 
 Your database is now in sync with your schema.
+
+To actually create the tables in your database, you now can use the following command of the Prisma CLI:
+Create the tables in your database based on your Prisma schema.
+
+npx prisma db push
+
+Because Prisma Client is tailored to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
+Regenerate your Prisma Schema.
+
+npx prisma generate
 
 Next steps:
 
