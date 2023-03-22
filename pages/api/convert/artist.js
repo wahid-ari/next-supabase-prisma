@@ -9,17 +9,19 @@ const csv = `id,created_at,name,cover_url,genre_id
 5,2023-02-20 10:25:25.764268+00,Sheila On 7,https://i.scdn.co/image/ab67616d0000b27354270208627aa8061a8abe21,1
 6,2023-02-20 11:17:49.766415+00,Dewa 19,https://i.scdn.co/image/ab6761610000e5eb96bfa9ff288138f3432e0fa4,2
 7,2023-02-20 13:09:10.276707+00,Ungu,https://i.scdn.co/image/ab6761610000e5eb2d4637222eabdc240d5134d4,1
-8,2023-02-20 13:45:36.678623+00,Letto,https://i.scdn.co/image/ab6761610000e5eba72d9867fae5d76011bb2204,1`
+8,2023-02-20 13:45:36.678623+00,Letto,https://i.scdn.co/image/ab6761610000e5eba72d9867fae5d76011bb2204,1`;
 
 export default async function handler(req, res) {
   const json = await csvToJson().fromString(csv);
-  json.forEach(e => { delete e.created_at });
-  json.forEach(e => {
-    e.id = Number(e.id)
-    e.genre_id = Number(e.genre_id)
+  json.forEach((e) => {
+    delete e.created_at;
+  });
+  json.forEach((e) => {
+    e.id = Number(e.id);
+    e.genre_id = Number(e.genre_id);
   });
 
-  let sortedJson = json.sort((a, b) => a.id - b.id)
+  let sortedJson = json.sort((a, b) => a.id - b.id);
 
   const jsonString = JSON.stringify(json, null, 2);
 

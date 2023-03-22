@@ -139,18 +139,20 @@ const csv = `id,name,youtube_url,cover_url,artist_id,created_at,album_id,preview
 131,Bila Tiba,CLlbqSVQOU0,https://i.scdn.co/image/ab67616d00001e02ef6821c358fd21c00921d919,7,2023-02-20 13:29:05.832098+00,33,https://p.scdn.co/mp3-preview/3dce9e7a19a7a6cc4ade70b1fd175a4e93ddecca?cid=774b29d4f13844c495f206cafdad9c86
 135,Sesungguhnya,KTrEsj20lWM,https://i.scdn.co/image/ab67616d00001e02ef6821c358fd21c00921d919,7,2023-02-20 13:32:28.748733+00,33,https://p.scdn.co/mp3-preview/7c9f9b0dc4f27c2ba029b02876931f33c1158cc7?cid=774b29d4f13844c495f206cafdad9c86
 140,Sebelum Cahaya,rZgxjhxkOjA,https://i.scdn.co/image/ab67616d00001e02beb3148bd8f70f1f62771d0a,8,2023-02-20 13:49:59.232831+00,35,https://p.scdn.co/mp3-preview/c0e2e578adb854d8f615a24079c871bbe048b748?cid=774b29d4f13844c495f206cafdad9c86
-141,Permintaan Hati,Kxo0LLisVA4,https://i.scdn.co/image/ab67616d00001e02beb3148bd8f70f1f62771d0a,8,2023-02-20 13:50:42.177351+00,35,https://p.scdn.co/mp3-preview/429e5da477b76adfd7ad93c8d4bd4b38b28bdfed?cid=774b29d4f13844c495f206cafdad9c86`
+141,Permintaan Hati,Kxo0LLisVA4,https://i.scdn.co/image/ab67616d00001e02beb3148bd8f70f1f62771d0a,8,2023-02-20 13:50:42.177351+00,35,https://p.scdn.co/mp3-preview/429e5da477b76adfd7ad93c8d4bd4b38b28bdfed?cid=774b29d4f13844c495f206cafdad9c86`;
 
 export default async function handler(req, res) {
   const json = await csvToJson().fromString(csv);
-  json.forEach(e => { delete e.created_at });
-  json.forEach(e => {
-    e.id = Number(e.id)
-    e.artist_id = Number(e.artist_id)
-    e.album_id = Number(e.album_id)
+  json.forEach((e) => {
+    delete e.created_at;
+  });
+  json.forEach((e) => {
+    e.id = Number(e.id);
+    e.artist_id = Number(e.artist_id);
+    e.album_id = Number(e.album_id);
   });
 
-  let sortedJson = json.sort((a, b) => a.id - b.id)
+  let sortedJson = json.sort((a, b) => a.id - b.id);
 
   const jsonString = JSON.stringify(json, null, 2);
 

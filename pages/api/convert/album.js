@@ -36,20 +36,20 @@ const csv = `id,created_at,name,cover,updated_at,artists_id
 32,2023-02-20 13:19:30.444386+00,Melayang,https://i.scdn.co/image/ab67616d00001e020f1c818c3d95a460cef8410f,2023-02-20 13:19:30.444386,7
 33,2023-02-20 13:28:15.805882+00,Ruang Hati,https://i.scdn.co/image/ab67616d00001e02ef6821c358fd21c00921d919,2023-02-20 13:28:15.805882,7
 34,2023-02-20 13:46:29.035194+00,"Truth, Cry, And Lie",https://i.scdn.co/image/ab67616d0000b2739a2a476d6cd4500f26fc484f,2023-02-20 13:46:29.035194,8
-35,2023-02-20 13:49:13.12425+00,Don’t Make Me Sad,https://i.scdn.co/image/ab67616d00001e02beb3148bd8f70f1f62771d0a,2023-02-20 13:49:13.12425,8`
+35,2023-02-20 13:49:13.12425+00,Don’t Make Me Sad,https://i.scdn.co/image/ab67616d00001e02beb3148bd8f70f1f62771d0a,2023-02-20 13:49:13.12425,8`;
 
 export default async function handler(req, res) {
   const json = await csvToJson().fromString(csv);
-  json.forEach(e => { 
-    delete e.created_at 
-    delete e.updated_at 
+  json.forEach((e) => {
+    delete e.created_at;
+    delete e.updated_at;
   });
-  json.forEach(e => { 
-    e.id = Number(e.id) 
-    e.artists_id = Number(e.artists_id) 
+  json.forEach((e) => {
+    e.id = Number(e.id);
+    e.artists_id = Number(e.artists_id);
   });
 
-  let sortedJson = json.sort((a, b) => a.id - b.id)
+  let sortedJson = json.sort((a, b) => a.id - b.id);
 
   const jsonString = JSON.stringify(json, null, 2);
 

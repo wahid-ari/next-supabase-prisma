@@ -1,8 +1,15 @@
 const { PrismaClient } = require('@prisma/client');
-const { genre, artist, album, song, playlist, playlist_song,
+const {
+  genre,
+  artist,
+  album,
+  song,
+  playlist,
+  playlist_song,
   playlist_user,
   playlist_user_song,
-  admin } = require('./data');
+  admin,
+} = require('./data');
 const prisma = new PrismaClient();
 
 async function main() {
@@ -14,7 +21,7 @@ async function main() {
     console.log(`Created Admin with id: ${data.id}`);
   }
   console.log(`Seeding Admin Finished.`);
-  
+
   console.log(`Start seeding Genre.`);
   for (const row of genre) {
     const data = await prisma.genre.create({
@@ -59,7 +66,7 @@ async function main() {
     console.log(`Created Playlist with id: ${data.id}`);
   }
   console.log(`Seeding Playlist Finished.`);
-  
+
   console.log(`Start Seeding Playlist Song.`);
   for (const row of playlist_song) {
     const data = await prisma.playlist_song.create({
@@ -68,7 +75,7 @@ async function main() {
     console.log(`Created Playlist Song with id: ${data.id}`);
   }
   console.log(`Seeding Playlist Song Finished.`);
-  
+
   console.log(`Start Seeding Playlist User.`);
   for (const row of playlist_user) {
     const data = await prisma.playlist_user.create({
@@ -77,7 +84,7 @@ async function main() {
     console.log(`Created Playlist User with id: ${data.id}`);
   }
   console.log(`Seeding Playlist User Finished.`);
-  
+
   console.log(`Start Seeding Playlist User Song.`);
   for (const row of playlist_user_song) {
     const data = await prisma.playlist_user_song.create({
@@ -92,12 +99,12 @@ async function main() {
 
 main()
   .then(async () => {
-    await prisma.$disconnect()
+    await prisma.$disconnect();
   })
   .catch(async (e) => {
-    console.error(e)
-    await prisma.$disconnect()
-    process.exit(1)
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   })
   .finally(async () => {
     await prisma.$disconnect();

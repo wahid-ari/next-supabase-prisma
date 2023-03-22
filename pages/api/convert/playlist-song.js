@@ -56,18 +56,20 @@ const csv = `id,playlist_id,song_id,created_at
 56,7,131,2023-02-20 13:38:03.777839+00
 57,7,133,2023-02-20 13:38:08.862532+00
 58,7,123,2023-02-20 13:38:25.111441+00
-59,7,132,2023-02-20 13:38:42.220929+00`
+59,7,132,2023-02-20 13:38:42.220929+00`;
 
 export default async function handler(req, res) {
   const json = await csvToJson().fromString(csv);
-  json.forEach(e => { delete e.created_at });
-  json.forEach(e => { 
-    e.id = Number(e.id) 
-    e.playlist_id = Number(e.playlist_id) 
-    e.song_id = Number(e.song_id) 
+  json.forEach((e) => {
+    delete e.created_at;
+  });
+  json.forEach((e) => {
+    e.id = Number(e.id);
+    e.playlist_id = Number(e.playlist_id);
+    e.song_id = Number(e.song_id);
   });
 
-  let sortedJson = json.sort((a, b) => a.id - b.id)
+  let sortedJson = json.sort((a, b) => a.id - b.id);
 
   const jsonString = JSON.stringify(json, null, 2);
 

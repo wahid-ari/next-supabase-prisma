@@ -3,9 +3,10 @@
 1. supabase csv export file in **public > supabase csv**
 2. API endpoint to convert csv to json in **pages > api > convert**
 
-## Supabase 
+## Supabase
 
 #### Troubleshoot cant access supabase from supabase API
+
 https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
 Run this SQL script in Supabase SQL editor.
 https://supabase.com/docs/guides/integrations/prisma#troubleshooting
