@@ -1,3 +1,4 @@
+import prisma from '@libs/prisma';
 import { supabase } from '@libs/supabase';
 
 export default async function handler(req, res) {
@@ -7,7 +8,8 @@ export default async function handler(req, res) {
     case 'GET':
       if (!query.id) {
         const { data } = await supabase.from('genre').select(`*`).order('id');
-        console.log(data);
+        // const genre = await prisma.genre.findMany({})
+        // res.status(200).json({data, genre});
         res.status(200).json(data);
       } else {
         const { data } = await supabase.from('genre').select(`*, artists (*)`).eq('id', query.id).order('id');
