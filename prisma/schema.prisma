@@ -12,93 +12,93 @@ datasource db {
 }
 
 model admin {
-  // bigint (int8), required, unique primary key, default autoincrement
-  id            BigInt          @id @default(autoincrement())
+  // int (int8), required, unique primary key, default autoincrement
+  id            Int             @id @default(autoincrement())
   // string, optional, varchar
-  username      String?         @db.VarChar
+  username      String?         @db.Text
   // string, optional, varchar
-  password      String?         @db.VarChar
+  password      String?         @db.Text
   // datetime, optional, default now, timestamptz
   created_at    DateTime?       @default(now()) @db.Timestamptz(6)
   // string, optional, varchar
-  name          String?         @db.VarChar
+  name          String?         @db.Text
   // string, optional, default "user", varchar
-  type          String?         @default("user") @db.VarChar
+  type          String?         @default("user") @db.Text
   playlist_user playlist_user[]
 }
 
 model album {
-  id         BigInt    @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   created_at DateTime? @default(now()) @db.Timestamptz(6)
-  name       String?   @db.VarChar
-  cover      String?   @db.VarChar
+  name       String?   @db.Text
+  cover      String?   @db.Text
   updated_at DateTime? @default(now()) @db.Timestamp(6)
-  artists_id BigInt?
+  artists_id Int?
   artists    artists?  @relation(fields: [artists_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   songs      songs[]
 }
 
 model artists {
-  id         BigInt    @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   created_at DateTime? @default(now()) @db.Timestamptz(6)
-  name       String    @db.VarChar
-  cover_url  String?   @db.VarChar
-  genre_id   BigInt?
+  name       String    @db.Text
+  cover_url  String?   @db.Text
+  genre_id   Int?
   album      album[]
   genre      genre?    @relation(fields: [genre_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   songs      songs[]
 }
 
 model genre {
-  id         BigInt    @id @default(autoincrement())
-  name       String?   @db.VarChar
+  id         Int       @id @default(autoincrement())
+  name       String?   @db.Text
   created_at DateTime? @default(now()) @db.Timestamptz(6)
   artists    artists[]
 }
 
 model playlist {
-  id            BigInt          @id @default(autoincrement())
-  name          String?         @db.VarChar
+  id            Int             @id @default(autoincrement())
+  name          String?         @db.Text
   created_at    DateTime?       @default(now()) @db.Timestamptz(6)
   playlist_song playlist_song[]
 }
 
 model playlist_song {
-  id          BigInt    @id @default(autoincrement())
-  playlist_id BigInt?
-  song_id     BigInt?
+  id          Int       @id @default(autoincrement())
+  playlist_id Int?
+  song_id     Int?
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
   playlist    playlist? @relation(fields: [playlist_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   songs       songs?    @relation(fields: [song_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model playlist_user {
-  id                 BigInt               @id @default(autoincrement())
-  user_id            BigInt?
-  name               String?              @db.VarChar
+  id                 Int                  @id @default(autoincrement())
+  user_id            Int?
+  name               String?              @db.Text
   created_at         DateTime?            @default(now()) @db.Timestamptz(6)
   admin              admin?               @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   playlist_user_song playlist_user_song[]
 }
 
 model playlist_user_song {
-  id               BigInt         @id @default(autoincrement())
-  playlist_user_id BigInt?
-  song_id          BigInt?
+  id               Int            @id @default(autoincrement())
+  playlist_user_id Int?
+  song_id          Int?
   created_at       DateTime?      @default(now()) @db.Timestamptz(6)
   playlist_user    playlist_user? @relation(fields: [playlist_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   songs            songs?         @relation(fields: [song_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model songs {
-  id                 BigInt               @id @default(autoincrement())
-  name               String               @db.VarChar
-  youtube_url        String?              @db.VarChar
-  cover_url          String?              @db.VarChar
-  artist_id          BigInt
+  id                 Int                  @id @default(autoincrement())
+  name               String               @db.Text
+  youtube_url        String?              @db.Text
+  cover_url          String?              @db.Text
+  artist_id          Int
   created_at         DateTime?            @default(now()) @db.Timestamptz(6)
-  album_id           BigInt?
-  preview_url        String?              @db.VarChar
+  album_id           Int?
+  preview_url        String?              @db.Text
   playlist_song      playlist_song[]
   playlist_user_song playlist_user_song[]
   album              album?               @relation(fields: [album_id], references: [id], onDelete: NoAction, onUpdate: NoAction)

@@ -1,42 +1,42 @@
 -- CreateTable
 CREATE TABLE "admin" (
-    "id" BIGSERIAL NOT NULL,
-    "username" VARCHAR,
-    "password" VARCHAR,
+    "id" SERIAL NOT NULL,
+    "username" TEXT,
+    "password" TEXT,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
-    "name" VARCHAR,
-    "type" VARCHAR,
+    "name" TEXT,
+    "type" TEXT DEFAULT 'user',
 
     CONSTRAINT "admin_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "album" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
-    "name" VARCHAR,
-    "cover" VARCHAR,
+    "name" TEXT,
+    "cover" TEXT,
     "updated_at" TIMESTAMP(6) DEFAULT CURRENT_TIMESTAMP,
-    "artists_id" BIGINT,
+    "artists_id" INTEGER,
 
     CONSTRAINT "album_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "artists" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
-    "name" VARCHAR NOT NULL,
-    "cover_url" VARCHAR,
-    "genre_id" BIGINT,
+    "name" TEXT NOT NULL,
+    "cover_url" TEXT,
+    "genre_id" INTEGER,
 
     CONSTRAINT "artists_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "genre" (
-    "id" BIGSERIAL NOT NULL,
-    "name" VARCHAR,
+    "id" SERIAL NOT NULL,
+    "name" TEXT,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "genre_pkey" PRIMARY KEY ("id")
@@ -44,8 +44,8 @@ CREATE TABLE "genre" (
 
 -- CreateTable
 CREATE TABLE "playlist" (
-    "id" BIGSERIAL NOT NULL,
-    "name" VARCHAR,
+    "id" SERIAL NOT NULL,
+    "name" TEXT,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "playlist_pkey" PRIMARY KEY ("id")
@@ -53,9 +53,9 @@ CREATE TABLE "playlist" (
 
 -- CreateTable
 CREATE TABLE "playlist_song" (
-    "id" BIGSERIAL NOT NULL,
-    "playlist_id" BIGINT,
-    "song_id" BIGINT,
+    "id" SERIAL NOT NULL,
+    "playlist_id" INTEGER,
+    "song_id" INTEGER,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "playlist_song_pkey" PRIMARY KEY ("id")
@@ -63,9 +63,9 @@ CREATE TABLE "playlist_song" (
 
 -- CreateTable
 CREATE TABLE "playlist_user" (
-    "id" BIGSERIAL NOT NULL,
-    "user_id" BIGINT,
-    "name" VARCHAR,
+    "id" SERIAL NOT NULL,
+    "user_id" INTEGER,
+    "name" TEXT,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "playlist_user_pkey" PRIMARY KEY ("id")
@@ -73,9 +73,9 @@ CREATE TABLE "playlist_user" (
 
 -- CreateTable
 CREATE TABLE "playlist_user_song" (
-    "id" BIGSERIAL NOT NULL,
-    "playlist_user_id" BIGINT,
-    "song_id" BIGINT,
+    "id" SERIAL NOT NULL,
+    "playlist_user_id" INTEGER,
+    "song_id" INTEGER,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "playlist_user_song_pkey" PRIMARY KEY ("id")
@@ -83,14 +83,14 @@ CREATE TABLE "playlist_user_song" (
 
 -- CreateTable
 CREATE TABLE "songs" (
-    "id" BIGSERIAL NOT NULL,
-    "name" VARCHAR NOT NULL,
-    "youtube_url" VARCHAR,
-    "cover_url" VARCHAR,
-    "artist_id" BIGINT NOT NULL,
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "youtube_url" TEXT,
+    "cover_url" TEXT,
+    "artist_id" INTEGER NOT NULL,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
-    "album_id" BIGINT,
-    "preview_url" VARCHAR,
+    "album_id" INTEGER,
+    "preview_url" TEXT,
 
     CONSTRAINT "songs_pkey" PRIMARY KEY ("id")
 );
