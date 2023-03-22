@@ -1,5 +1,11 @@
+### Supabase CSV Export convert to JSON
+
+1. supabase csv export file in **public > supabase csv**
+2. API endpoint to convert csv to json in **pages > api > convert**
+
 ## Supabase 
-when cant access supabase from supabase API
+
+#### Troubleshoot cant access supabase from supabase API
 https://stackoverflow.com/questions/67551593/supabase-client-permission-denied-for-schema-public
 Run this SQL script in Supabase SQL editor.
 https://supabase.com/docs/guides/integrations/prisma#troubleshooting
@@ -21,12 +27,13 @@ If you run into this problem, create a draft migration using prisma migrate dev 
 Run prisma migrate dev to apply the draft migration to the database.
 
 ## Prisma
+
 https://www.prisma.io/docs/reference/api-reference/command-reference
 
 Create the database schema
 Run the following command to create a migration file with the SQL necessary to create the database schema:
 
-npx prisma migrate dev --name init
+     npx prisma migrate dev --name init
 
 You should see the following output:
 
@@ -35,12 +42,12 @@ Your database is now in sync with your schema.
 To actually create the tables in your database, you now can use the following command of the Prisma CLI:
 Create the tables in your database based on your Prisma schema.
 
-npx prisma db push
+     npx prisma db push
 
 Because Prisma Client is tailored to your own schema, you need to update it every time your Prisma schema file is changing by running the following command:
 Regenerate your Prisma Schema.
 
-npx prisma generate
+     npx prisma generate
 
 Next steps:
 
