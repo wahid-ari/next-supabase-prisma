@@ -24,7 +24,6 @@ export default function Home() {
   const router = useRouter();
   const { query } = router;
   const { data: genre, error: errorGenre } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/genre`, fetcher);
-  console.log(genre);
   const { data: songs, error: errorSongs } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/song`, fetcher);
   const { data: albums, error: errorAlbums } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/album`, fetcher);
   const { data: artists, error: errorArtists } = useSWR(`${process.env.NEXT_PUBLIC_API_ROUTE}/api/artist`, fetcher);
