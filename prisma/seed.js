@@ -6,6 +6,15 @@ const { genre, artist, album, song, playlist, playlist_song,
 const prisma = new PrismaClient();
 
 async function main() {
+  console.log(`Start Seeding Admin.`);
+  for (const row of admin) {
+    const data = await prisma.admin.create({
+      data: row,
+    });
+    console.log(`Created Admin with id: ${data.id}`);
+  }
+  console.log(`Seeding Admin Finished.`);
+  
   console.log(`Start seeding Genre.`);
   for (const row of genre) {
     const data = await prisma.genre.create({
@@ -77,15 +86,6 @@ async function main() {
     console.log(`Created Playlist User Song with id: ${data.id}`);
   }
   console.log(`Seeding Playlist User Song Finished.`);
-  
-  console.log(`Start Seeding Admin.`);
-  for (const row of admin) {
-    const data = await prisma.admin.create({
-      data: row,
-    });
-    console.log(`Created Admin with id: ${data.id}`);
-  }
-  console.log(`Seeding Admin Finished.`);
 
   console.log(`All Seeding finished.`);
 }
