@@ -12,17 +12,17 @@ datasource db {
 }
 
 model admin {
-  // int (int8), required, unique primary key, default autoincrement
+  // int, required, unique primary key, default autoincrement
   id            Int             @id @default(autoincrement())
-  // string, optional, varchar
+  // string, optional, text
   username      String?         @db.Text
-  // string, optional, varchar
+  // string, optional, text
   password      String?         @db.Text
   // datetime, optional, default now, timestamptz
   created_at    DateTime?       @default(now()) @db.Timestamptz(6)
-  // string, optional, varchar
+  // string, optional, text
   name          String?         @db.Text
-  // string, optional, default "user", varchar
+  // string, optional, default "user", text
   type          String?         @default("user") @db.Text
   playlist_user playlist_user[]
 }
